@@ -6,9 +6,17 @@ import router from './router'
 // 引入elementUI和需要的css样式文件
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-Vue.config.productionTip = false
+// 引入自定义base.css文件
+import '@/assets/base.css'
+// 引入设置后的的axios插件(将axios设置为vue的插件)
+import Http from './assets/plugins/http.js';
+// 使用Http
+Vue.use(Http);
 // 使用elementUI
 Vue.use(ElementUI);
+
+// 开发阶段是否显示报错
+Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
