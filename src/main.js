@@ -12,6 +12,10 @@ import '@/assets/base.css'
 import Http from './assets/plugins/http.js';
 // 引入moment时间格式插件
 import moment from 'moment'
+// 引入基于elementUI自定义面包屑组件
+import MyBread from './components/cusBread'
+// 定义全局组件
+Vue.component(MyBread.name,MyBread);
 // 使用Http
 Vue.use(Http);
 // 使用elementUI

@@ -1,10 +1,6 @@
 <template>
   <el-card class="box-card">
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/users' }">用户管理</el-breadcrumb-item>
-      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <my-bread leaveone="首页" leavetwo="用户管理"></my-bread>
     <el-row class="input_dad">
       <el-col :span="10">
         <el-input
@@ -290,9 +286,6 @@ export default {
     },
     // 显示用户列表数据
     getTabledata: async function() {
-      this.$http.defaults.headers.common[
-        "Authorization"
-      ] = localStorage.getItem("token");
       const res = await this.$http.get(
         `users?query=${this.query}&pagenum=${this.pagenum}&pagesize=${
           this.pagesize
