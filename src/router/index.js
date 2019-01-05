@@ -36,19 +36,19 @@ const router = new Router({
   ]
 });
 
-// router.beforeEach((to, from, next) => {         // 全局守卫功能
-//   if(to.name === 'login'){     //去的是登录页面
-//     next()                   //去吧
-//   }else{                       //不是的话
-//     if(!localStorage.getItem('token')){     //检查token信息不存在
-//       router.push({                         //不存在，
-//         name: 'login'                       //不能去，把路由改到登录页
-//       });
-//       Message.error('请先登录');             //友好提示，请先登录
-//     }else{                                  //检查token信息存在
-//       next();                               //该去哪去哪
-//     }
-//   }
-// });
+router.beforeEach((to, from, next) => {         // 全局守卫功能
+  if(to.name === 'login'){     //去的是登录页面
+    next()                   //去吧
+  }else{                       //不是的话
+    if(!localStorage.getItem('token')){     //检查token信息不存在
+      router.push({                         //不存在，
+        name: 'login'                       //不能去，把路由改到登录页
+      });
+      Message.error('请先登录');             //友好提示，请先登录
+    }else{                                  //检查token信息存在
+      next();                               //该去哪去哪
+    }
+  }
+});
 
 export default router;    // 导出路由
