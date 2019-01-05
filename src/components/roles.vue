@@ -9,19 +9,19 @@
             <!-- 如果弹出框没有数据 -->
             <span v-if="right.row.children.length === 0">该角色没有分配权限</span>
           </el-row>
-          <el-row v-for="(v,i) in right.row.children" :key="v.id">
+          <el-row v-for="(v) in right.row.children" :key="v.id">
             <el-col :span="4">
               <el-tag type="success" closable @close="delRights(right.row,v.id)">{{v.authName}}</el-tag>
               <i class="el-icon-arrow-right"></i>
             </el-col>
             <el-col :span="20">
-              <el-row v-for="(v1,i1) in v.children" :key="v1.id">
+              <el-row v-for="(v1) in v.children" :key="v1.id">
                 <el-col :span="4">
                   <el-tag closable @close="delRights(right.row,v1.id)">{{v1.authName}}</el-tag>
                   <i class="el-icon-arrow-right"></i>
                 </el-col>
                 <el-col :span="20">
-                  <span v-for="(v2,i2) in v1.children" :key="v2.id">
+                  <span v-for="(v2) in v1.children" :key="v2.id">
                     <el-tag type="info" closable @close="delRights(right.row,v2.id)">{{v2.authName}}</el-tag>
                   </span>
                 </el-col>
