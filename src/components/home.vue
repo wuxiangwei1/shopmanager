@@ -21,54 +21,16 @@
     </el-header>
     <el-container>
       <el-aside class="aside" width="200px">
-        <el-menu
-          router
-          default-active="2"
-          :unique-opened = "true"
-          class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
-        >
-          <el-submenu index="1">
+        <el-menu router default-active="2" :unique-opened="true" class="el-menu-vertical-demo">
+          <el-submenu :index="i" v-for="(v,i) in rights" :key="i">
             <template slot="title">
               <i class="el-icon-location"></i>
-              <span>用户管理</span>
+              <span>{{v.authName}}</span>
             </template>
-              <el-menu-item index="users"><i class="el-icon-setting"></i>用户列表</el-menu-item>
+            <el-menu-item :index="v1.path" v-for="(v1,i1) in v.children" :key="i1">
+              <i class="el-icon-setting"></i>{{v1.authName}}
+            </el-menu-item>
           </el-submenu>
-           <el-submenu index="2">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>权限管理</span>
-            </template>
-              <el-menu-item index="roles"><i class="el-icon-setting"></i>角色列表</el-menu-item>
-              <el-menu-item index="rights"><i class="el-icon-setting"></i>权限列表</el-menu-item>
-          </el-submenu>
-           <el-submenu index="3">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>商品管理</span>
-            </template>
-              <el-menu-item index="3-1"><i class="el-icon-setting"></i>商品列表</el-menu-item>
-              <el-menu-item index="3-2"><i class="el-icon-setting"></i>分类参数</el-menu-item>
-              <el-menu-item index="3-2"><i class="el-icon-setting"></i>商品分类</el-menu-item>
-
-          </el-submenu>
-           <el-submenu index="4">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>订单管理</span>
-            </template>
-              <el-menu-item index="4-1"><i class="el-icon-setting"></i>订单列表</el-menu-item>
-          </el-submenu>
-           <el-submenu index="5">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>数据统计</span>
-            </template>
-              <el-menu-item index="5-1"><i class="el-icon-setting"></i>数据报表</el-menu-item>
-          </el-submenu>
-          
         </el-menu>
       </el-aside>
       <el-main>
@@ -80,25 +42,38 @@
 
 <script>
 export default {
+  data() {
+    return {
+      rights: []
+    }
+  },
   // 在渲染之前检查localStorage中有没有用户信息
   beforeCreate() {
-    if(!localStorage.getItem('token')){
+    if (!localStorage.getItem("token")) {
       this.$router.push({
-        name: 'login'
-      })
-      this.$message.error('请先登录')
+        name: "login"
+      });
+      this.$message.error("请先登录");
     }
+  },
+  created(){
+    this.getrights();
   },
   methods: {
     // 退出功能
-    handelLoginout: function () {
-    // 清除 localStorage 保存的信息
+    handelLoginout: function() {
+      // 清除 localStorage 保存的信息
       localStorage.clear();
       // 重定向到登录页面
       this.$router.push({
-        name: 'login'
+        name: "login"
       });
-       this.$message.success('退出登录成功');
+      this.$message.success("退出登录成功");
+    },
+    async getrights() {   //获取当前角色所拥有的权限，用来展示左侧菜单的权限
+      const res = await this.$http.get('menus')  //直接发请求就好，因为当前登录角色发送的请求（后台已经根据token处理过了）
+      this.rights = res.data.data;
+      console.log(this.rights)
     }
   }
 };
