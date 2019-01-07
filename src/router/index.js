@@ -5,6 +5,9 @@ import Home from '../components/home'         //主页
 import  User from '../components/user'        //用户列表
 import Rights from '../components/rights'     //权限列表
 import Roles from '../components/roles'       //角色列表
+import Goods from '../components/goods'       //商品列表
+import GoodsAdd from '../components/goodsadd'       //添加商品页面
+import Params from '../components/params'      //分类参数页面
 import {Message} from 'element-ui'            //该页面想使用一个提示框
 Vue.use(Router)                               //使用路由（vue-router）
 
@@ -23,13 +26,29 @@ const router = new Router({
         path: '/rights',
         component: Rights
       },{
-        name: 'roles',
+        name: 'roles',            //角色列表
         path: '/roles',
         component: Roles
+      },{
+        name: 'goods',            //商品列表
+        path: '/goods',
+        component: Goods
+      },{
+        name: 'goodsadd',          //添加商品
+        path: '/goodsadd',
+        component: GoodsAdd
+      },{
+        name: 'params',
+        path: '/params',
+        component: Params
       }]
     },
     {
       name: 'login',              //登录页
+      path: '/login',
+      component: Login
+    },{
+      name: '/',              //登录页
       path: '/login',
       component: Login
     }

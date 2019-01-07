@@ -22,7 +22,7 @@
     <el-container>
       <el-aside class="aside" width="200px">
         <el-menu router default-active="2" :unique-opened="true" class="el-menu-vertical-demo">
-          <el-submenu :index="i" v-for="(v,i) in rights" :key="i">
+          <el-submenu :index="''+ i" v-for="(v,i) in rights" :key="i">
             <template slot="title">
               <i class="el-icon-location"></i>
               <span>{{v.authName}}</span>
@@ -73,7 +73,7 @@ export default {
     async getrights() {   //获取当前角色所拥有的权限，用来展示左侧菜单的权限
       const res = await this.$http.get('menus')  //直接发请求就好，因为当前登录角色发送的请求（后台已经根据token处理过了）
       this.rights = res.data.data;
-      console.log(this.rights)
+      // console.log(this.rights)
     }
   }
 };
@@ -82,9 +82,9 @@ export default {
 <style>
 .container {
   height: 100%;
-  line-height: 50px;
 }
 .container .header {
   background: #b3c0d1;
+  line-height: 50px;
 }
 </style>
