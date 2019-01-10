@@ -11,7 +11,13 @@ axios.interceptors.request.use(function (config) {
   // 切记要把请求return出去，此处发生bug
   return config;
 });
-
+// 添加响应拦截器
+axios.interceptors.response.use(function (response) {
+  // 如果响应数据的状态码不为200或者201
+  if(response.status !== 200 && response.status !== 201)
+  alert(response.data.meta.msg)
+  return response;
+});
 const Http = {};
 Http.install = function (Vue) {
   // 添加实例方法

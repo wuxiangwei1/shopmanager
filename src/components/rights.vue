@@ -1,7 +1,7 @@
 <template>
   <el-card class="big_card">
     <my-bread leaveone="权限管理" leavetwo="权限列表"></my-bread>
-    <el-table :data="rightsList" stripe style="width: 100%" class="table">
+    <el-table v-loading="loading" :data="rightsList" stripe style="width: 100%" class="table">
       <el-table-column type="index" label="序号" width="150"></el-table-column>
       <el-table-column prop="authName" label="权限名称" width="230"></el-table-column>
       <el-table-column prop="path" label="路径" width="230"></el-table-column>
@@ -22,7 +22,8 @@
 export default {
   data() {
     return {
-      rightsList: []
+      rightsList: [],
+      loading: true
     };
   },
   created() {
@@ -33,6 +34,7 @@ export default {
       const res = await this.$http.get("rights/list");
       const{data:{data,meta:{msg,status}}} = res;
       if(status === 200){
+        this.loading = false
         this.rightsList = data;
       }else{
         this.$message.error(msg);

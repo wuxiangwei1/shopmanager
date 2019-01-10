@@ -108,8 +108,7 @@ export default {
       const { data: resData } = await this.$http.get(`goods?pagenum=${this.pagenum}&pagesize=${this.pagesize}`)
       this.total = resData.data.total
       this.list = resData.data.goods
-      this.loading = false
-      // console.log(this.list)
+      this.loading = false   
     }
   }
 }
