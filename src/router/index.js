@@ -9,6 +9,7 @@ import Goods from '../components/goods'       //商品列表
 import GoodsAdd from '../components/goodsadd'       //添加商品页面
 import Params from '../components/params'      //分类参数页面
 import  CateGories from '../components/categories'   //商品分类页面
+import Order from '../components/order'         //订单管理页面
 import {Message} from 'element-ui'            //该页面想使用一个提示框
 Vue.use(Router)                               //使用路由（vue-router）
 
@@ -46,6 +47,10 @@ const router = new Router({
         name: 'categories',         //商品分类页面
         path: '/categories',
         component: CateGories
+      },{
+        name: 'order',         //商品分类页面
+        path: '/orders',
+        component: Order
       }]
     },
     {
