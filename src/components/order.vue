@@ -1,7 +1,7 @@
 <template>
   <el-card>
     <my-bread leaveone="订单管理" laevetwo="订单列表"></my-bread>
-    <el-table :data="list" style="width: 100%">
+    <el-table :data="list" style="width: 100%" v-loading="loading">
       <el-table-column type="index" label="订单序号" width="80"></el-table-column>
       <el-table-column prop="order_number" label="订单编号" width="220"></el-table-column>
       <el-table-column prop="order_price" label="订单价格" width="100"></el-table-column>
@@ -59,6 +59,7 @@ import catlist from "@/assets/city_data2017_element.js";
 export default {
   data() {
     return {
+      loading: true,   //表格数据没加载出来的动画
       list: [],
       dialogFormVisible: false,
       form: {
@@ -81,6 +82,7 @@ export default {
       const res = await this.$http.get(`orders?pagenum=1&pagesize=10`);
       // console.log(res);
       this.list = res.data.data.goods;
+      this.loading = false;     //数据加载完成后关闭加载动画
     },
     showEditdia() {
       this.catlist = catlist;      //把引入的城市数据赋给级联选择器所需要的数据

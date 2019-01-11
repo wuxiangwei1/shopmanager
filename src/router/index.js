@@ -10,6 +10,7 @@ import GoodsAdd from '../components/goodsadd'       //添加商品页面
 import Params from '../components/params'      //分类参数页面
 import  CateGories from '../components/categories'   //商品分类页面
 import Order from '../components/order'         //订单管理页面
+import Reports from '../components/reports'       //数据报表页面
 import {Message} from 'element-ui'            //该页面想使用一个提示框
 Vue.use(Router)                               //使用路由（vue-router）
 
@@ -51,6 +52,10 @@ const router = new Router({
         name: 'order',         //商品分类页面
         path: '/orders',
         component: Order
+      },{
+        name: 'reports',         //商品分类页面
+        path: '/reports',
+        component: Reports
       }]
     },
     {
@@ -67,7 +72,6 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {         // 全局守卫功能
-  console.log(this)
   if(to.name === 'login'){     //去的是登录页面
     next()                   //去吧
   }else{                       //不是的话
